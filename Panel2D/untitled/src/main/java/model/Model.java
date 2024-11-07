@@ -8,9 +8,9 @@ import java.util.Collection;
 
 public class Model {
     MyShape currentShape;
-    Collection<RectangularShape> list;
+    Collection<MyShape> list;
     private static Model model = null;
-    private Model(){
+    public Model(){
         list = new ArrayList<>(); //создаем коллекцию фигур
     }
 
@@ -22,9 +22,9 @@ public class Model {
         return model;
     }
 
-    public void addShape(Point2D[] points){
-        currentShape = currentShape.clone() ;
-        list.add(currentShape.getShape());
+    public void addShape(MyShape shape){
+        currentShape = shape ;
+        list.add(currentShape);
     }
     public void setCurrentShape(MyShape currentShape) {
 
@@ -35,13 +35,16 @@ public class Model {
         return currentShape;
     }
 
-    public Collection<RectangularShape> getList() {
+    public Collection<MyShape> getList() {
 
         return list;
     }
 
 
     public void setFrame(Point2D[] points) {
+
         currentShape.addShape(points);
     }
+
+
 }

@@ -1,40 +1,42 @@
 package conrol;
-
+import conrol.action.Action;
 import view.MyFrame;
 import view.MyPanel;
 import model.Model;
 import model.MyShape;
 import java.awt.*;
-import java.awt.geom.Point2D;
-import java.awt.geom.RectangularShape;
 import java.util.Collection;
 
+import conrol.action.ActionInterface;
 public class Controler {
     MyPanel panel;
     MyFrame frame;
     Model model;
-    Point2D[] points;
-
+    ActionInterface  actionInterface;
 
     public Controler() {
-        model = Model.getInstance();
+        model = new Model();
+        model.setCurrentShape(new MyShape());
         panel = new MyPanel(this);
         frame = new MyFrame(panel);
-        points = new Point2D[2];
-        model.setCurrentShape(new MyShape());
-
+//        actionDraw.setSampleShape(new MyShape(Color.BLUE, new Rectangle2D.Double()));
+        actionInterface =  new Action(model);
+        frame.setController(this);
+    }
+    public ActionInterface setActionInterface(ActionInterface actionInterface) {
+        this.actionInterface = actionInterface;
+        actionInterface.setModel(model);
+        return actionInterface;
     }
         public void mousePressed (Point point){
-            points[0] = point;
-            model.addShape(points);
+            actionInterface.mousePressed(point);
         }
 
         public void mouseDragged (Point point){
-            points[1] = point;
-            model.setFrame(points);
+            actionInterface.mouseDragget(point);
         }
 
-        public Collection<RectangularShape> translate () {
-            return model.getList();
+        public Collection<MyShape> translate () {
+        return model.getList();
         }
 }
