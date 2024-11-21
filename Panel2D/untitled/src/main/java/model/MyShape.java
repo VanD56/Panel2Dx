@@ -19,6 +19,11 @@ public class MyShape {
         shape = new Rectangle2D.Double();
         this.fillBehavior = FillBih.FILL;
     }
+
+    public void setcolor(Color c) {
+        this.color = c;
+    }
+
     public RectangularShape getShape() {
         return shape;
     }

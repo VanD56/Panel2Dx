@@ -1,15 +1,19 @@
 package conrol.action;
+import conrol.State;
 import model.Model;
 import model.MyShape;
 
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
+
 public class Action implements ActionInterface {
     MyShape sampleShape;
     MyShape shape;
     Point2D[] p;
     Model model;
+    State state;
 
 
     @Override
@@ -21,17 +25,17 @@ public class Action implements ActionInterface {
         this.sampleShape = sampleShape;
     }
 
-    public Action() {
-
-        p = new Point2D[2];
-        sampleShape = new MyShape(Color.BLUE, new Ellipse2D.Double());
-    }
 
     public Action(Model model) {
         shape = new MyShape();
         this.p = new Point2D[2];
         this.model = model;
-        sampleShape = new MyShape(Color.BLUE, new Ellipse2D.Double());
+        sampleShape = new MyShape(Color.BLUE,new Rectangle2D.Double());
+    }
+
+    public Action() {
+        this.p = new Point2D[2];
+        sampleShape = new MyShape(Color.BLUE,new Rectangle2D.Double());
     }
 
     public void setShapes(MyShape shape) {

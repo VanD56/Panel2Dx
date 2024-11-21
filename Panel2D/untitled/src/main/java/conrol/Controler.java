@@ -12,28 +12,25 @@ public class Controler {
     MyPanel panel;
     MyFrame frame;
     Model model;
-    ActionInterface  actionInterface;
+
+    State state;
 
     public Controler() {
+
         model = new Model();
+        state = new State(model);
         model.setCurrentShape(new MyShape());
         panel = new MyPanel(this);
-        frame = new MyFrame(panel);
-//        actionDraw.setSampleShape(new MyShape(Color.BLUE, new Rectangle2D.Double()));
-        actionInterface =  new Action(model);
-        frame.setController(this);
+        frame = new MyFrame(panel,state);
+
     }
-    public ActionInterface setActionInterface(ActionInterface actionInterface) {
-        this.actionInterface = actionInterface;
-        actionInterface.setModel(model);
-        return actionInterface;
-    }
+
         public void mousePressed (Point point){
-            actionInterface.mousePressed(point);
+            state.getActionInterface().mousePressed(point);
         }
 
         public void mouseDragged (Point point){
-            actionInterface.mouseDragget(point);
+            state.getActionInterface().mouseDragget(point);
         }
 
         public Collection<MyShape> translate () {
